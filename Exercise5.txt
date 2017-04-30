@@ -1,5 +1,6 @@
 3.1 Verifying the Network
 
+
 	ifconfig response for Original VM:
 
 		eth13	Link encap:Ethernet  HWaddr 08:00:27:11:f5:29
@@ -19,6 +20,7 @@
 			TX packets:115 errors:0 dropped:0 overruns:0 carrier:0
 			collisions:0 txqueuelen:0
 			RX bytes:10662 (10.6 KB)  TX bytes:10662 (10.6 KB)
+
 
 	ifconfig response for Cloned VM:
 
@@ -40,6 +42,7 @@
 			collisions:0 txqueuelen:0
 			RX bytes:12009 (12.0 KB)  TX bytes:12009 (12.0 KB)
 
+
 	Ping response of Original VM to Cloned VM:
 
 		PING 10.0.2.5 (10.0.2.5) 56(84) bytes of data.
@@ -52,3 +55,21 @@
 		--- 10.0.2.5 ping statistics ---
 		5 packets transmitted, 5 received, 0% packet loss, time 3996 ms
 		rtt min/avg/max/mdev = 0.235/0.279/0.422/0.072 ms
+
+	
+	Ping response of Cloned VM to Original VM:
+
+		PING 10.0.2.4 (10.0.2.4) 56(84) bytes of data.
+		64 bytes from 10.0.2.4: icmp_req=1 ttl=64 time=0.204 ms
+		64 bytes from 10.0.2.4: icmp_req=2 ttl=64 time=0.259 ms
+		64 bytes from 10.0.2.4: icmp_req=3 ttl=64 time=0.249 ms
+		64 bytes from 10.0.2.4: icmp_req=4 ttl=64 time=0.333 ms
+		64 bytes from 10.0.2.4: icmp_req=5 ttl=64 time=0.269 ms
+
+		--- 10.0.2.4 ping statistics ---
+		5 packets transmitted, 5 received, 0% packet loss, time 3999 ms
+		rtt min/avg/max/mdev = 0.204/0.262/0.333/0.046 ms
+
+
+
+3.2 Writing a Packet Sniffer
