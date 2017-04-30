@@ -1,0 +1,54 @@
+3.1 Verifying the Network
+
+	ifconfig response for Original VM:
+
+		eth13	Link encap:Ethernet  HWaddr 08:00:27:11:f5:29
+			inet addr:10.0.2.4  Bcast:10.0.2.255  Mask:255.255.255.0
+			inet6 addr: fe80::a00:27ff:fe11:f529/64 Scope:Link
+			UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+			RX packets:317 errors:0 dropped:0 overruns:0 frame:0
+			TX packets:323 errors:0 dropped:0 overruns:0 carrier:0
+			collisions:0 txqueuelen:1000
+			RX bytes:120231 (120.2 KB)  TX bytes:38097 (38.0 KB)
+
+		lo	Link encap:Local Loopback
+			inet addr:127.0.0.1  Mask:255.0.0.0
+			inat6 addr: ::1/128 Scope:Host
+			UP LOOPBACK RUNNING  MTU:16436  Metric:1
+			RX packets:115 errors:0 dropped:0 overruns:0 frame:0
+			TX packets:115 errors:0 dropped:0 overruns:0 carrier:0
+			collisions:0 txqueuelen:0
+			RX bytes:10662 (10.6 KB)  TX bytes:10662 (10.6 KB)
+
+	ifconfig response for Cloned VM:
+
+		eth14	Link encap:Ethernet  HWaddr 08:00:27:c7:92:2f
+			inet addr:10.0.2.5  Bcast:10.0.2.255  Mask:255.255.255.0
+			inet6 addr: fe80::a00:27ff:fec7:922f/64 Scope:Link
+			UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+			RX packets:422 errors:0 dropped:0 overruns:0 frame:0
+			TX packets:501 errors:0 dropped:0 overruns:0 carrier:0
+			collisions:0 txqueuelen:1000
+			RX bytes:173173 (173.1 KB)  TX bytes:59576 (59.5 KB)
+
+		lo	Link encap:Local Loopback
+			inet addr:127.0.0.1  Mask:255.0.0.0
+			inet6 addr: ::1/128 Scope:Host
+			UP LOOPBACK RUNNING  MTU:16436  Metric:1
+			RX packets:128 errors:0 dropped:0 overruns:0 frame:0
+			TX packets:128 errors:0 dropped:0 overruns:0 carrier:0
+			collisions:0 txqueuelen:0
+			RX bytes:12009 (12.0 KB)  TX bytes:12009 (12.0 KB)
+
+	Ping response of Original VM to Cloned VM:
+
+		PING 10.0.2.5 (10.0.2.5) 56(84) bytes of data.
+		64 bytes from 10.0.2.5: icmp_req=1 ttl=64 time=0.422 ms
+		64 bytes from 10.0.2.5: icmp_req=2 ttl=64 time=0.250 ms
+		64 bytes from 10.0.2.5: icmp_req=3 ttl=64 time=0.240 ms
+		64 bytes from 10.0.2.5: icmp_req=4 ttl=64 time=0.235 ms
+		64 bytes from 10.0.2.5: icmp_req=5 ttl=64 time=0.249 ms
+
+		--- 10.0.2.5 ping statistics ---
+		5 packets transmitted, 5 received, 0% packet loss, time 3996 ms
+		rtt min/avg/max/mdev = 0.235/0.279/0.422/0.072 ms
