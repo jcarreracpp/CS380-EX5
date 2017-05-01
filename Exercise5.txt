@@ -256,4 +256,507 @@
 
 3.3 Password sniffing
 
-	
+	Telnet activated on sniffer VM:
+
+		 * Starting internet superserver inetd
+
+
+	Telnet bridge on Clone VM:
+
+		Trying 10.0.2.4...
+		Connected to 10.0.2.4.
+		Escape character is '^]'.
+		Ubuntu 12.04.2 LTS
+		ubuntu login: seed
+		Password:
+		Welcome to Ubuntu 12.04.2 LTS (GNU/Linux 3.5.0-37-generic i686)
+
+		 * Documentation:  https://help.ubuntu.com/
+
+		New release '14.04.1 LTS' available.
+		Run 'do-release-upgrade' to upgrade to it.
+
+
+		The programs included with the Ubuntu system are free software;
+		the exact distribution terms for each program are described in the
+		individual files in /usr/share/doc/*/copyright.
+
+		Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+		applicable law.
+
+		[04/30/2017 21:51] seed@ubuntu:~4 cd Desktop
+		[04/30/2017 21:51] seed@ubuntu:~/Desktop$ cat > empty.txt
+
+		^[
+		[04/30/2017 21:51] seed@ubuntu:~Desktop$ exit
+		logout
+		Connection closed by foreign host.
+
+
+	Checking Original VM:
+
+		The empty.txt file created from the link to the Cloned VM exists on the Desktop of the Original
+		VM.
+
+
+	Telnet bridge on Clone VM, with packet sniffer's response on Original VM:
+
+		sniffex - Sniffer example using libpcap
+		Copyright (c) 2005 The Tcpdump Group
+		THERE IS ABSOLUTELY NO WARRANTY FOR THIS PROGRAM.
+ 
+		Device: eth13
+		Number of packets: 50
+		Filter expression: tcp
+ 
+		Packet number 1:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 2:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+ 
+		Packet number 3:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 4:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (27 bytes):
+		00000   ff fd 03 ff fb 18 ff fb  1f ff fb 20 ff fb 21 ff    ........... ..!.
+		00016   fb 22 ff fb 27 ff fd 05  ff fb 23                   ."..'.....#
+ 
+		Packet number 5:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+ 
+		Packet number 6:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (12 bytes):
+		00000   ff fd 18 ff fd 20 ff fd  23 ff fd 27                ..... ..#..'
+		 
+		Packet number 7:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 8:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (39 bytes):
+		00000   ff fb 03 ff fd 1f ff fd  21 ff fe 22 ff fb 05 ff    ........!.."....
+		00016   fa 20 01 ff f0 ff fa 23  01 ff f0 ff fa 27 01 ff    . .....#.....'..
+		00032   f0 ff fa 18 01 ff f0                                .......
+ 
+		Packet number 9:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 10:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (74 bytes):
+		00000   ff fa 1f 00 4e 00 18 ff  f0 ff fa 20 00 33 38 34    ....N...... .384
+		00016   30 30 2c 33 38 34 30 30  ff f0 ff fa 23 00 75 62    00,38400....#.ub
+		00032   75 6e 74 75 3a 30 ff f0  ff fa 27 00 00 44 49 53    untu:0....'..DIS
+		00048   50 4c 41 59 01 75 62 75  6e 74 75 3a 30 ff f0 ff    PLAY.ubuntu:0...
+		00064   fa 18 00 78 74 65 72 6d  ff f0                      ...xterm..
+ 
+		Packet number 11:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (3 bytes):
+		00000   ff fd 01                                            ...
+ 
+		Packet number 12:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (3 bytes):
+		00000   ff fc 01                                            ...
+		 
+		Packet number 13:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (3 bytes):
+		00000   ff fb 01                                            ...
+ 
+		Packet number 14:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (3 bytes):
+		00000   ff fd 01                                            ...
+ 
+		Packet number 15:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (34 bytes):
+		00000   55 62 75 6e 74 75 20 31  32 2e 30 34 2e 32 20 4c    Ubuntu 12.04.2 L
+		00016   54 53 0d 0a 75 62 75 6e  74 75 20 6c 6f 67 69 6e    TS..ubuntu login
+		00032   3a 20                                               :
+ 
+		Packet number 16:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 17:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (1 bytes):
+		00000   73                                                  s
+ 
+		Packet number 18:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (1 bytes):
+		00000   73                                                  s
+ 
+		Packet number 19:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 20:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (1 bytes):
+		00000   65                                                  e
+		 
+		Packet number 21:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (1 bytes):
+		00000   65                                                  e
+ 
+		Packet number 22:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 23:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (1 bytes):
+		00000   65                                                  e
+ 
+		Packet number 24:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (1 bytes):
+		00000   65                                                  e
+ 
+		Packet number 25:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 26:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (1 bytes):
+		00000   64                                                  d
+ 
+		Packet number 27:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (1 bytes):
+		00000   64                                                  d
+ 
+		Packet number 28:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 29:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (2 bytes):
+		00000   0d 00                                               ..
+ 
+		Packet number 30:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (12 bytes):
+		00000   0d 0a 50 61 73 73 77 6f  72 64 3a 20                ..Password:
+ 
+		Packet number 31:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 32:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (1 bytes):
+		00000   64                                                  d
+ 
+		Packet number 33:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+ 
+		Packet number 34:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (1 bytes):
+		00000   65                                                  e
+ 
+		Packet number 35:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+ 
+		Packet number 36:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (1 bytes):
+		00000   65                                                  e
+ 
+		Packet number 37:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+ 
+		Packet number 38:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (1 bytes):
+		00000   73                                                  s
+ 
+		Packet number 39:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+ 
+		Packet number 40:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+		   Payload (2 bytes):
+		00000   0d 00                                               ..
+ 
+		Packet number 41:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+ 
+		Packet number 42:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (2 bytes):
+		00000   0d 0a                                               ..
+ 
+		Packet number 43:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 44:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (69 bytes):
+		00000   4c 61 73 74 20 6c 6f 67  69 6e 3a 20 53 75 6e 20    Last login: Sun
+		00016   41 70 72 20 33 30 20 32  32 3a 31 32 3a 30 35 20    Apr 30 22:12:05
+		00032   50 44 54 20 32 30 31 37  20 66 72 6f 6d 20 75 62    PDT 2017 from ub
+		00048   75 6e 74 75 2d 32 2e 6c  6f 63 61 6c 20 6f 6e 20    untu-2.local on
+		00064   70 74 73 2f 32                                      pts/2
+ 
+		Packet number 45:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 46:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (2 bytes):
+		00000   0d 0a                                               ..
+ 
+		Packet number 47:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 48:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (63 bytes):
+		00000   57 65 6c 63 6f 6d 65 20  74 6f 20 55 62 75 6e 74    Welcome to Ubunt
+		00016   75 20 31 32 2e 30 34 2e  32 20 4c 54 53 20 28 47    u 12.04.2 LTS (G
+		00032   4e 55 2f 4c 69 6e 75 78  20 33 2e 35 2e 30 2d 33    NU/Linux 3.5.0-3
+		00048   37 2d 67 65 6e 65 72 69  63 20 69 36 38 36 29       7-generic i686)
+ 
+		Packet number 49:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 57773
+		   Dst port: 23
+ 
+		Packet number 50:
+		       From: 10.0.2.4
+		         To: 10.0.2.5
+		   Protocol: TCP
+		   Src port: 23
+		   Dst port: 57773
+		   Payload (2 bytes):
+		00000   0d 0a                                               ..
+ 
+		Capture complete.
+
+		As we can see, the password is in plain characters on the right hand side.
+
+
+	Wireshark:
+
+		The wireshark live packet capture definitely provides more information, clutter makes it difficult
+		to discern messages to the naked eye, but through careful viewing i was still able to locate
+		the username and password inputs.
+
+
+	Security of telnet:
+
+		I don't think telnet is a very secure method of remote access at all. Sniffers present on either
+		system can easily gain access to the login password, which automatically fails telnet as a secure
+		remote access system.
+
+
+3.4 SSH
+
+	Wireshark with SSH:
+
+		With wireshark enabled on the Original (client) VM, I use SSH on the Cloned VM and connect to the
+		Original. Wireshark updates rapidly as I input the password for the connection, but when I check
+		the logs, I cannot find any semblance of the original password. It seems like Secure Shell has done
+		its job and protected the login password.
