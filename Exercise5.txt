@@ -73,3 +73,187 @@
 
 
 3.2 Writing a Packet Sniffer
+
+	pcap library summary:
+
+		First the interface of the target has to be identified. The user can personally input the interface
+		or allow pcap's internal mechanisms to determine one that can be used on the device. pcap is then
+		initiallized with the name of the device or devices. Each instance of a connection to a device is
+		a seperate session, and as such is given a name to differentiate it from the other possible
+		sessions at one time. Filters on how packets are read, such as by port number, are fed to pcap by
+		the user. They are fed as rulesets that pcap internally compiles and applies. pcap then either
+		recieves the next packet, or recieves n number of packets from a loop, where n is determined by
+		user or function, before exiting.
+
+
+	sniffex packet sniffing result:
+
+		sniffex - Sniffer example using libpcap
+		Copyright (c) 2005 The Tcpdump Group
+		THERE IS ABSOLUTELY NO WARRANTY FOR THIS PROGRAM.
+
+		Device: eth13
+		Number of packets: 10
+		Filter expression: ip
+
+		Packet number 1:
+		       From: 10.0.2.5
+		         To: 10.0.2.4
+		   Protocol: ICMP
+
+		Packet number 2:
+		       From: 10.0.2.4
+			 To: 10.0.2.5
+		   Protocol: ICMP
+
+		Packet number 3:
+		       From: 10.0.2.4
+			 To: 10.0.2.3
+		   Protocol: UDP
+
+		Packet number 4:
+		       From: 10.0.2.3
+			 To: 255.255.255.255
+		   Protocol: UDP
+
+		Packet number 5:
+		       From: 10.0.2.5
+			 To: 10.0.2.4
+		   Protocol: ICMP
+
+		Packet number 6:
+		       From: 10.0.2.4
+			 T0: 10.0.2.5
+		   Protocol: ICMP
+
+		Packet number 7:
+		       From: 10.0.2.5
+			 To: 10.0.2.4
+		   Protocol: ICMP
+
+		Packet number 8:
+		       From: 10.0.2.4
+			 To: 10.0.2.5
+		   Protocol: ICMP
+
+		Packet number 9:
+		       From: 10.0.2.5
+			 To: 10.0.2.4
+		   Protocol: ICMP
+
+		Packet number 10:
+		       From: 10.0.2.4
+			 To: 10.0.2.5
+		   Protocol: ICMP
+
+		Capture complete.
+
+
+	sniffex packet sniffing result after filter has been modified to capture only TCP packets.
+
+		sniffex - Sniffer example using libpcap
+		Copyright (c) 2005 The Tcpdump Group
+		THERE IS ABSOLUTELY NO WARRANTY FOR THIS PROGRAM.
+
+		Device: eth13
+		Number of packets: 10
+		Filter expression: tcp
+
+		Packet number 1:
+		       From: 10.0.2.4
+			 To: 162.213.33.48
+		   Protocol: TCP
+		   Src port: 34394
+		   Dst port: 443
+
+		Packet number 2:
+		       From: 10.0.2.4
+			 To: 162.213.33.48
+		   Protocol: TCP
+		   Src port: 34395
+		   Dst port: 443
+
+		Packet number 3:
+		       From: 162.213.33.48
+			 To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 443
+		   Dst port: 34394
+
+		Packet number 4:
+		       From: 10.0.2.4
+			 To: 162.213.33.48
+		   Protocol: TCP
+		   Src port: 34394
+		   Dst port: 443
+
+		Packet number 5:
+		       From: 10.0.2.4
+			 To: 162.213.33.48
+		   Protocol: TCP
+		   Src port: 34394
+		   Dst port: 443
+		   Payload (148 bytes):
+		00000   16 03 00 00 8f 01 00 00  8b 03 03 59 06 ac 77 b9    ...........Y..w.
+		00016	20 62 3b 24 5c 9b 73 ea  06 2b 7b 33 0a b1 64 91     b;$\.s..+{3..d.
+		00032   76 b6 5c a8 5d 8d ab 2f  94 35 81 00 00 30 00 33    v.\.]../.5...0.3
+		00048   00 67 00 45 00 39 00 6b  00 88 00 16 00 32 00 40    .g.E.9.k.....2.@
+		00064   00 44 00 38 00 6a 00 87  00 13 00 66 00 2f 00 3c    .D.8.j.....f./.<
+		00080   00 41 00 35 00 3d 00 84  00 0a 00 05 00 04 01 00    .A.5.=..........
+		00096   00 32 00 00 00 1b 00 19  00 00 16 76 69 64 65 6f    .2.........video
+		00112   73 65 61 72 63 68 2e 75  62 75 6e 74 75 2e 63 6f    search.ubuntu.co
+		00128   6d ff 01 00 01 00 00 0d  00 0a 00 08 04 02 04 01    m...............
+		00144   02 01 02 02					    ....
+
+		Packet number 6:
+		       From: 162.213.33.48
+			 To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 443
+		   Dst port: 34395
+
+		Packet number 7:
+		       From: 10.0.2.4
+			 To: 162.213.33.48
+		   Protocol: TCP
+		   Src port: 34395
+		   Dst port: 443
+
+		Packet number 8:
+		       From: 10.0.2.4
+			 To: 162.213.33.48
+		   Protocol: TCP
+		   Src port: 34395
+		   Dst port: 443
+		   Payload (148 bytes):
+		00000   16 03 00 00 8f 01 00 00  8b 03 03 59 06 ac 77 b9    ...........Y..w.
+		00016   f4 ca 70 04 ab 3a d9 40  49 5c 1d b4 ea d2 3a d2    ..p..:.@I\....:.
+		00032   15 ad 9d 54 8f 25 08 3f  cb 79 50 00 00 30 00 33    ...T.%.?.yP..0.3
+		00048   00 67 00 45 00 39 00 6b  00 88 00 16 00 32 00 40    .g.E.9.k.....2.@
+		00064   00 44 00 38 00 6a 00 87  00 13 00 66 00 2f 00 3c    .D.8.j.....f./.<
+		00080   00 41 00 35 00 3d 00 84  00 0a 00 05 00 04 01 00    .A.5.=..........
+		00096   00 32 00 00 00 1b 00 19  00 00 16 76 69 64 65 6f    .2.........video
+		00112   73 65 61 72 63 68 2e 75  62 75 6e 74 75 2e 63 6f    search.ubuntu.co
+		00128   6d ff 01 00 01 00 00 0d  00 0a 00 08 04 02 04 01    m...............
+		00144   02 01 02 02					    ....
+
+		Packet number 9:
+		       From: 162.213.33.48
+			 To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 443
+		   Dst port: 34395
+
+		Packet number 10:
+		       From: 162.213.33.48
+			 To: 10.0.2.4
+		   Protocol: TCP
+		   Src port: 443
+		   Dst port: 34394
+
+		Capture complete.
+
+
+3.3 Password sniffing
+
+	
